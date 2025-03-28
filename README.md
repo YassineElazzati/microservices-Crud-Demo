@@ -6,7 +6,7 @@ Bienvenue dans ce projet d'introduction aux **microservices avec Java Spring Boo
 
 ## ✨ Objectifs
 
-- Comprendre les bases des microservices
+- Comprendre les bases des microservices 🙌🏼
 - Créer une architecture simple avec 2 microservices : `auteur-service` et `livre-service`
 - Interagir avec des API REST (CRUD)
 - Utiliser Docker pour la base de données
