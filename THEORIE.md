@@ -122,7 +122,7 @@ Et chaque microservice peut :
 
 L’ensemble fonctionne comme un **système distribué**, où chaque composant parle aux autres via des **API REST ou de la communication asynchrone**.
 
-> (Une image sera ajoutée ici pour illustrer visuellement cette architecture.)
+![alt text](image.png)
 
 ---
 
