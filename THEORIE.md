@@ -39,14 +39,14 @@ Une bonne analogie : une entreprise avec plusieurs pôles (RH, logistique, compt
 - Interface technique exposée sur le réseau (REST ou SOAP)
 - Utilisé pour fournir des données ou actions à un client (navigateur, appli mobile)
 
-🧠 **Exemple :**
+🧠 **Exemple :** 
 > Une méthode `GET /produits` dans un monolithe Java EE → C'est un WebService, **pas** un microservice.
 
 #### Microservice :
 - Mini-application à part entière (logique, base, API)
 - Autonome : déploiement, redémarrage, scalabilité isolés
 
-🧠 **Exemple :**
+🧠 **Exemple :** 
 > Un service `ProduitService` avec Spring Boot :
 > - Contrôleur REST `GET /produits`
 > - Service métier `ProduitService`
@@ -81,31 +81,35 @@ Une bonne analogie : une entreprise avec plusieurs pôles (RH, logistique, compt
 
 ## IMPLÉMENTER UN MICROSERVICE AVEC SPRING BOOT
 
-- Les étapes de conception d'un microservice
-- Création de projet avec **Spring Initializr**
-- Implémentation d'un **contrôleur REST**
-- Configuration de l'environnement de dév (IntelliJ, Postman, etc.)
-- Test local avec `localhost:8080`
-- Déploiement avec **Spring Boot** + **Spring Cloud**
-- Activer les "Cross-Origin" (CORS)
-- Utilisation de la **CLI Spring Boot** (en option avancée)
+- **Les étapes de conception** d'un microservice : identifier le domaine métier, créer l'entité, réfléchir aux endpoints REST, créer le repository et le service associé.
+- **Création de projet avec Spring Initializr** : choisir les dépendances essentielles (Spring Web, Spring Data JPA, PostgreSQL Driver, Lombok...).
+- **Implémentation d'un contrôleur REST** : créer une API REST (`@RestController`) pour gérer les opérations CRUD.
+- **Configurer son environnement de développement** : utiliser IntelliJ ou VS Code, Postman pour tester les endpoints, et Docker pour la base de données si besoin.
+- **Tester localement avec `localhost:8080`** : s'assurer que le projet tourne et que les endpoints REST fonctionnent.
+- **Déployer avec Spring Boot + Spring Cloud** : pour gérer les microservices dans une architecture distribuée.
+- **Activer CORS** si besoin avec `@CrossOrigin` pour permettre les appels depuis une appli front comme Angular.
+- **Spring Boot CLI (optionnel)** : permet de générer rapidement un projet ou de lancer une appli Spring sans IDE.
 
 ---
 
 ## SPRING CLOUD ET L'ÉQUILIBRAGE DE CHARGE
 
-- Définition de l'équilibrage de charge
-- Outils Spring : **Spring Cloud LoadBalancer**, **Gateway**, **Ribbon** (ancien)
-- API Gateway = point d'entrée unique
+- **Équilibrage de charge** : stratégie permettant de répartir les requêtes sur plusieurs instances d'un service (scalabilité).
+- **Spring Cloud LoadBalancer** : outil moderne pour le load balancing interne à Spring Cloud.
+- **Spring Cloud Gateway** : routeur d’API moderne, remplace souvent Zuul, point d’entrée unique.
+- **Ribbon** : ancien outil désormais déprécié mais encore mentionné dans certains projets.
+- **API Gateway = point d’accès unique** à tout le système, centralise la sécurité, le routage et le monitoring.
 
 ---
 
 ## LE SERVICE DISCOVERY DE SPRING CLOUD
 
-- Pourquoi **multi-instancier** une API ?
-- Prérequis : instances multiples, scalabilité, résilience
-- Utilisation d'**Eureka** pour la **découverte de services**
-- Centralisation de la config et enregistrement dynamique
-
----
+- **Pourquoi multi-instancier ?** Pour améliorer la **disponibilité**, la **scalabilité**, et la **tolérance aux pannes**.
+- **Problème** : comment savoir sur quelle instance appeler un service ?
+- **Solution : Eureka**
+  - Service de **répertoire dynamique** (naming server)
+  - Chaque microservice **s’enregistre automatiquement** dans Eureka
+  - Les autres services peuvent ensuite **le découvrir dynamiquement** via son nom
+- **Spring Cloud Eureka Client** : facilite l'enregistrement automatique des microservices
+- **Avec Eureka + Gateway**, on obtient une architecture dynamique, scalable, et adaptée au Cloud.
 
